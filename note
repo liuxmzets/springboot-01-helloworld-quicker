@@ -1,0 +1,99 @@
+yaml语法:
+1.基本语法
+k: v
+以空格的缩进来控制层级关系：
+只要式左对齐的一列数据，都是同一个层级的
+
+server:
+    port: 8081
+    path: /path
+
+
+属性和值也是大小写敏感的
+
+2.值的写法
+字面量: 普通得值(数字，字符串，布尔)
+ k: v;字面量直接来写
+ 字符串默认不用加上单引号或者双引号
+   "":双引号不会转义字符串里面的特殊字符，
+   name: "zhang\nlisi": 输出:zhangsan 换行 lisi
+   '': 单引号会转义字符串里面的特殊字符
+   name: 'zhang\nlisi'
+对象,Map(属性和值(键值对):
+  k,v:在下一行来写对象的属性和值，注意缩进
+   friends:
+     lastName: zhangsan
+     age: 20
+
+   行内写法:
+   行内写法:
+   friends: {lastName: zhangsan,age: 18}
+
+数组 (List,Set)
+   用- 值表示数组中的一个元素
+   pets:
+    - cat
+    - dog
+    - pig
+
+   行内写法:
+   pets: [cat,dog,pig]
+
+
+我们可以导入配置文件处理器，以后编写yaml文件就有提示了
+
+@ConfigurationProperties
+@Value("")//Spring底层的注解
+<bean class="Person">
+    <property name="lastName" value="字面量/${key}从环境变量，
+    配置文件中获取值/#{SpEL}"></property>
+</bean>
+
+@ConfigurationProperties(prefix="person")
+@Value("")
+//<bean class="Person">
+    <property name="lastName"
+    value="字面量/${key}从环境变量 配置文件中获取值
+    /#{SpEl}"></property>
+  </bean>
+
+@ConfigurationProperties
+@Value
+
+功能上   批量注入配置文件中的属性   一个一个指定 value
+松散绑定 支持                    不支持
+SpEl    不支持                  支持
+jsr303数据校验  支持             不支持
+
+配置文件yaml还是properties他们都能获取到值
+配置文件yaml还是properties他们都能获取到值
+
+@Value
+@ConfigurationProperties
+@ConfigurationProperties
+
+如果说，我们只是在某个业务逻辑中
+需要获取一下配置文件中的某项值，
+使用@Value
+
+@RestController
+public class HelloController{
+
+@Value("${person.last-name}"
+private String name;
+
+public String sayHello(){
+    return "hello:"+name
+}
+
+如果说，我们专门编写了一个javaBean和配置
+文件进行映射
+和配置文件进行映射
+就使用ConfigurationProperties
+@ConfigurationProperties
+}
+
+@PropertySource
+@PropertySource
+
+@ConfigurationProperties
